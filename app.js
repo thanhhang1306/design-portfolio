@@ -92,10 +92,12 @@ app.post('/project.html', (req, res) => {
    
    https.get(url, (response) => {
       response.on("data", (d) => {
+         console.log(response.statusCode);
          if(response.statusCode == 200) {
             var data = JSON.parse(d);
             var weatherData = data.list[0].main.temp;
             var weatherDesc = data.list[0].weather[0].description;
+            console.log(data);
             res.render('weather.html', {query:query, weatherData:weatherData, weatherDesc:weatherDesc, link:`http://openweathermap.org/img/wn/${data.list[16].weather[0].icon}@2x.png`});
          }
          else {
