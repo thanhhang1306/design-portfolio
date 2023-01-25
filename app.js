@@ -4,11 +4,14 @@ const bodyParser = require('body-parser');
 const port = 3000; 
 const https = require('https');
 const { json } = require('body-parser');
+const ejs = require('ejs');
 const e = require('express');
-// const { allowedNodeEnvironmentFlags } = require('process');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname);
 
 app.listen(port, () => {
    console.log(`Newsletter app listening at http://localhost:${port}`);
@@ -29,16 +32,6 @@ app.get('/signup.html', (req, res) => {
 app.get('/project.html', (req, res) => {
    res.sendFile(__dirname + '/project.html');
 });
-
-// app.get('/success.html', (req, res) => {
-//    res.sendFile(__dirname + '/success.html');
-// });
-
-
-// app.get('/failure.html', (req, res) => {
-//    res.sendFile(__dirname + '/failure.html');
-// });
-
 
 app.post('/signup.html', (req, res) => {
    const name = req.body.name;
@@ -87,5 +80,30 @@ app.post('/failure.html',(req, res) => {
 
 app.post('/success.html',(req, res) => {
    res.redirect('/index.html');
+});
+
+app.post('/weather_null.html',(req, res) => {
+   res.redirect('/project.html');
+});
+
+app.post('/project.html', (req, res) => {
+   var query = req.body.cityName;
+   const apiKey = "847b3862644bcb770a2b6546fe882c92";
+   const unit = `metric`;
+   const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${query}&units=${unit}`;
+   
+   https.get(url, (response) => {
+      response.on("data", (d) => {
+         if(response.statusCode == 200) {
+            var data = JSON.parse(d);
+            var weatherData = data.list[0].main.temp;
+            var weatherDesc = data.list[0].weather[0].description;
+            res.render('weather.html', {query:query, weatherData:weatherData, weatherDesc:weatherDesc, link:`http://openweathermap.org/img/wn/${data.list[16].weather[0].icon}@2x.png`});
+         }
+         else {
+            res.sendFile(__dirname + '/weather_null.html');
+         }
+      }); 
+   });
 });
 
