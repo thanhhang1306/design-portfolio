@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = 3000; 
+const PORT = 3000; 
 const https = require('https');
 const ejs = require('ejs');
 
@@ -11,8 +11,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname);
 
-app.listen(process.env.PORT || `0.0.0.0:$PORT` ||  port, () => {
-   console.log(`Newsletter app listening at http://localhost:${process.env.PORT}`);
+app.listen((process.env.PORT || PORT), () => {
+   console.log(`Newsletter app listening at http://localhost:${PORT}`);
 });
 
 app.get('/', (req, res) => {
