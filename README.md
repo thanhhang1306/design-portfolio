@@ -7,9 +7,9 @@
 
 
 ## Requirements
-For remotely hosted site, click [here](https://web-production-fdda.up.railway.app/). Site is hosted using [Railway](https://railway.app/).
+For remotely hosted site, click [here](https://web-production-6082.up.railway.app/). Site is hosted using [Railway](https://railway.app/).
 
-If link does not work, copy https://web-production-fdda.up.railway.app/ to your browser address search. 
+If link does not work, copy https://web-production-6082.up.railway.app/ to your browser address search. 
 
 For development, you will only need Node.js and a node global package, Yarn or npm, installed in your environement.
 

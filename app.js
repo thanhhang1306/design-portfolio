@@ -86,7 +86,7 @@ app.post('/weather_null.html',(req, res) => {
 
 app.post('/project.html', (req, res) => {
    var query = req.body.cityName;
-   const apiKey = "847b3862644bcb770a2b6546fe882c92";
+   const apiKey = "5bacc913211026e7db110ec329eb9105";
    const unit = `metric`;
    const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${query}&units=${unit}`;
    
