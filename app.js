@@ -11,8 +11,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname);
 
-app.listen(port, () => {
-   console.log(`Newsletter app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || port, () => {
+   console.log(`Newsletter app listening at http://localhost:${process.env.PORT}`);
 });
 
 app.get('/', (req, res) => {
