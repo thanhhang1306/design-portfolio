@@ -48,11 +48,11 @@ app.post('/signup.html', (req, res) => {
    ]};
 
    const jsonData = JSON.stringify(data);
-   const url = 'https://us17.api.mailchimp.com/3.0/lists/72d2615dea';
+   const url = `${process.env.MAIL_WEB}`;
 
    const options = {
       method: 'POST',
-      auth: "hang:97fcc93952edbd443de59f891dd0e656-us17"
+      auth: `hang:${process.env.MAIL_API_KEY}`
    }
    
    const request = https.request(url, options, (response) => {
@@ -86,7 +86,7 @@ app.post('/weather_null.html',(req, res) => {
 
 app.post('/project.html', (req, res) => {
    var query = req.body.cityName;
-   const apiKey = "5bacc913211026e7db110ec329eb9105";
+   const apiKey = process.env.WEATHER_API_KEY;
    const unit = `metric`;
    const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&q=${query}&units=${unit}`;
    
