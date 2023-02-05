@@ -12,7 +12,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname);
 
 app.listen((process.env.PORT || PORT), () => {
-   console.log(`Newsletter app listening at http://localhost:${process.env.PORT} [unless you're on local server, in which case port 3000]`);
+   console.log(`Design portfolio app listening at http://localhost:${process.env.PORT} [unless you're on local server, in which case port 3000]`);
 });
 
 app.get('/', (req, res) => {
